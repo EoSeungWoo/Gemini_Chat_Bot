@@ -4,6 +4,10 @@ let chatHistoryArray = []; // 대화 내용을 저장할 배열
 document.getElementById('sendApiKey').addEventListener('click', () => {
     apiKey = document.getElementById('apiKey').value;
     alert('API Key가 저장되었습니다.');
+
+    // Hide the API key input and button
+    document.getElementById('apiKey').style.display = 'none';
+    document.getElementById('sendApiKey').style.display = 'none';
 });
 
 document.getElementById('sendButton').addEventListener('click', async () => {
@@ -57,7 +61,7 @@ document.getElementById('sendButton').addEventListener('click', async () => {
             const botResponse = data.candidates[0].content.parts[0].text; // 응답 텍스트
             const botResponseDiv = document.createElement('div');
             botResponseDiv.className = 'message bot-message';
-            botResponseDiv.textContent = botResponse; // 응답 텍스트 표시
+            botResponseDiv.innerHTML = marked(botResponse); // Convert Markdown to HTML
             chatHistory.appendChild(botResponseDiv);
             
             // 대화 내용 배열에 봇 응답 추가
